@@ -7,6 +7,8 @@ public class Zombie : MonoBehaviour {
 	public float forwardForce = 50.0f;
 	public float sightRange = 15.0f;
 	public float maxVelocity = 1.0f;
+	public float damage = 0.3f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -28,5 +30,16 @@ public class Zombie : MonoBehaviour {
 		//Debug.Log (rigidbody.velocity.magnitude);
 
 		rigidbody.velocity = Vector3.ClampMagnitude (rigidbody.velocity, maxVelocity);
+	}
+
+	void OnCollisionEnter(Collision other){
+		
+		if (other.gameObject.tag != "Player") {
+			return;		
+		}
+		
+		//Debug.Log ("BOUM!");
+		other.rigidbody.AddForce ((other.transform.position - transform.position).normalized * 100.0f);
+		other.gameObject.SendMessage ("Hit", damage, SendMessageOptions.DontRequireReceiver);
 	}
 }

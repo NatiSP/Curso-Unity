@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Mine : MonoBehaviour {
 
-	float damage = 0.2f;
+	float damage = 1.0f;
 
 	void OnTriggerEnter(Collider other){
 

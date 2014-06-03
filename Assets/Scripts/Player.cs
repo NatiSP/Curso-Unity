@@ -8,14 +8,17 @@ public class Player : MonoBehaviour {
 	public float jumpForwardForce = 100.0f;
 	public float torque = 5.0f;
 	public int jumpCount = 3;
-	public int lives = 3;
+	public float lives = 3.0f;
+	public int coins = 0;
 
 	bool isGrounded = true;
+	bool keysEnabled = true;
 	Vector3 pointA;
 
 	ParticleSystem blood;
 	Transform weapon;
 	Transform life;
+	//GUIText ncoins;
 
 	// Use this for initialization
 	void Start () {
@@ -41,7 +44,7 @@ public class Player : MonoBehaviour {
 			isGrounded = false;
 		}
 
-		if (Input.GetKey (KeyCode.W)){
+		if (Input.GetKey (KeyCode.W) && keysEnabled == true){
 			if(isGrounded == true)
 				rigidbody.AddForce (transform.forward * forwardForce * Time.deltaTime);
 			else
@@ -49,35 +52,35 @@ public class Player : MonoBehaviour {
 		}
 
 
-		if (Input.GetKey (KeyCode.S)){
+		if (Input.GetKey (KeyCode.S) && keysEnabled == true){
 			if(isGrounded == true)
 				rigidbody.AddForce (transform.forward * -(forwardForce) * Time.deltaTime);
 			else
 				rigidbody.AddForce (transform.forward * -jumpForwardForce * Time.deltaTime);
 		}
 
-		if((Input.GetAxis("Mouse X")<0)){
+		if((Input.GetAxis("Mouse X")<0) && keysEnabled == true){
 			//Code for action on mouse moving left
 			//rigidbody.AddTorque (transform.up * -torque * Time.deltaTime);
 			//print("Mouse moved left");
 			transform.Rotate(Vector3.up * -torque);
 		}
 
-		if((Input.GetAxis("Mouse X")>0)){
+		if((Input.GetAxis("Mouse X")>0) && keysEnabled == true){
 			//Code for action on mouse moving right
 			//rigidbody.AddTorque (transform.up * torque * Time.deltaTime);
 			//print("Mouse moved left");
 			transform.Rotate(Vector3.up * torque);
 		}
 
-		if (Input.GetKey (KeyCode.D)){
+		if (Input.GetKey (KeyCode.D) && keysEnabled == true){
 			if(isGrounded == true)
 				rigidbody.AddForce (transform.right * forwardForce * Time.deltaTime);
 			else
 				rigidbody.AddForce (transform.right * jumpForwardForce * Time.deltaTime);
 		}
 
-		if (Input.GetKey (KeyCode.A)){
+		if (Input.GetKey (KeyCode.A) && keysEnabled == true){
 			if(isGrounded == true)
 				rigidbody.AddForce (transform.right * -forwardForce * Time.deltaTime);
 			else
@@ -90,12 +93,12 @@ public class Player : MonoBehaviour {
 		}
 
 		if (lives == 0) {
-			rigidbody.position = pointA;
-			lives = 3;
+			Death ();
+			//ncoins.SendMessage ("Death");
+		}
 
-			life.SendMessage ("Add");
-			life.SendMessage ("Add");
-			life.SendMessage ("Add");
+		if (transform.position.y < -10) {
+			Death ();		
 		}
 	}
 
@@ -111,11 +114,53 @@ public class Player : MonoBehaviour {
 
 		Debug.Log ("Ay!");
 		blood.Play ();
-		lives--;
-		life.SendMessage ("Hit");
+		lives = lives - receivedDamage;
+		life.SendMessage ("Hit", receivedDamage);
+	}
+
+	public void AddCoin(){
+		coins++;
+	}
+
+	public void AddLife(){
+		lives++;
+		life.SendMessage ("Add");
+	}
+
+	void OnGUI(){
+		GUI.Label( new Rect( 1040, 250, 320, 320 ), coins.ToString() );
 	}
 
 	void Attack(){
 		weapon.SendMessage ("Attack");
 	}
+
+	void Death(){
+		keysEnabled = false;
+		rigidbody.position = pointA;
+		lives = 3;
+		
+		life.SendMessage ("Set", 3.0f);
+		StartWait ();
+		renderer.enabled = false;
+		StartWait ();
+		renderer.enabled = true;
+		StartWait ();
+		renderer.enabled = false;
+		StartWait ();
+		renderer.enabled = true;
+		keysEnabled = true;
+	}
+
+	IEnumerator StartWait()
+	{
+		yield return StartCoroutine(Wait());
+	}
+	
+	IEnumerator Wait()
+	{
+		Debug.Log("waiting");
+		yield return new WaitForSeconds(1);      
+	}
+
 }

@@ -4,9 +4,9 @@ using System.Collections;
 public class CreatureSpawner : MonoBehaviour {
 
 	public GameObject creaturePrefab;
-	public float creationRate = 3.0f;
-	int creatureCount = 0;
-	int maxCreatureCount = 5;
+	public float creationRate = 5.0f;
+
+	public int maxCreatureCount = 3;
 
 	// Use this for initialization
 	void Start () {
@@ -16,8 +16,9 @@ public class CreatureSpawner : MonoBehaviour {
 	void SpawnCreature(){
 		GameObject []go = GameObject.FindGameObjectsWithTag("Enemy");
 
-		if (go.Length < maxCreatureCount)
+		if (go.Length < maxCreatureCount) {
 			Instantiate (creaturePrefab, transform.position, Quaternion.identity);
+		}
 	}
 
 }

@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{FF3E618C-6AC8-6245-ED15-F49FA2974772}</ProjectGuid>
+	<ProjectGuid>{58F06256-462B-C2D2-C06A-AEB5E670347F}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -47,11 +47,14 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Ammo.cs" />
+     <Compile Include="Assets\Scripts\Coin.cs" />
+     <Compile Include="Assets\Scripts\Corazon.cs" />
      <Compile Include="Assets\Scripts\CreatureSpawner.cs" />
      <Compile Include="Assets\Scripts\LanzaPiedras.cs" />
      <Compile Include="Assets\Scripts\Mine.cs" />
      <Compile Include="Assets\Scripts\MovementPlatform.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\Puntuacion.cs" />
      <Compile Include="Assets\Scripts\Vida.cs" />
      <Compile Include="Assets\Scripts\Zombie.cs" />
   </ItemGroup>
