@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
 	public float jumpForwardForce = 100.0f;
 	public float torque = 5.0f;
 	public int jumpCount = 3;
-	public float lives = 3.0f;
+	public float lives = 5.0f;
 	public int coins = 0;
 
 	bool isGrounded = true;
@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
 
 	ParticleSystem blood;
 	Transform weapon;
-	Transform life;
+	public GUITexture life;
 	//GUIText ncoins;
 
 	// Use this for initialization
@@ -27,9 +27,8 @@ public class Player : MonoBehaviour {
 		blood = t.particleSystem;
 
 		weapon = transform.FindChild ("Weapon");
-		life = transform.FindChild ("Vida");
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if ((Input.GetMouseButtonDown(0))) {
@@ -92,7 +91,7 @@ public class Player : MonoBehaviour {
 			//Debug.Log ("Salto = " + jumpTime);
 		}
 
-		if (lives == 0) {
+		if (lives <= 0) {
 			Death ();
 			//ncoins.SendMessage ("Death");
 		}
@@ -127,29 +126,15 @@ public class Player : MonoBehaviour {
 		life.SendMessage ("Add");
 	}
 
-	void OnGUI(){
-		GUI.Label( new Rect( 1040, 250, 320, 320 ), coins.ToString() );
-	}
-
 	void Attack(){
 		weapon.SendMessage ("Attack");
 	}
 
 	void Death(){
-		keysEnabled = false;
 		rigidbody.position = pointA;
-		lives = 3;
+		lives = 5;
 		
-		life.SendMessage ("Set", 3.0f);
-		StartWait ();
-		renderer.enabled = false;
-		StartWait ();
-		renderer.enabled = true;
-		StartWait ();
-		renderer.enabled = false;
-		StartWait ();
-		renderer.enabled = true;
-		keysEnabled = true;
+		life.SendMessage ("Set", 5.0f);
 	}
 
 	IEnumerator StartWait()

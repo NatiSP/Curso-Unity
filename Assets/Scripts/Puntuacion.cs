@@ -8,13 +8,12 @@ public class Puntuacion : MonoBehaviour {
 
 	public void Death(){
 		coins = 0;
+		guiText.text = coins.ToString ();
 	}
 	
 	public void Add(){
 		coins++;
+		guiText.text = coins.ToString ();
 	}
-
-	void OnGUI() {
-		GUI.Label(new Rect(10, 10, 150, 150), coins.ToString());
-	}
+	
 }

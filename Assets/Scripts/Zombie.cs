@@ -8,12 +8,16 @@ public class Zombie : MonoBehaviour {
 	public float sightRange = 15.0f;
 	public float maxVelocity = 1.0f;
 	public float damage = 0.3f;
-
+	int recorrido = 0;
+	float randX;
+	float randZ;
 
 	// Use this for initialization
 	void Start () {
 		GameObject go = GameObject.Find ("Player");
 		target = go.transform;
+		randX = (Random.value - 0.5f);
+		randZ = (Random.value - 0.5f);
 	}
 	
 	// Update is called once per frame
@@ -24,9 +28,18 @@ public class Zombie : MonoBehaviour {
 	void HuntTarget(){
 		Vector3 towardsTarget = (target.position - transform.position);
 
-		if(towardsTarget.magnitude < sightRange)
-			rigidbody.AddForce (towardsTarget.normalized * forwardForce * Time.deltaTime);
 
+		if (towardsTarget.magnitude < sightRange)
+			rigidbody.AddForce (towardsTarget.normalized * forwardForce * Time.deltaTime);
+		else {
+			if(recorrido > 500){
+				randX = (Random.value - 0.5f);
+				randZ = (Random.value - 0.5f);
+				recorrido = 0;
+			}
+			rigidbody.AddForce (new Vector3 (randX, 0, randZ).normalized * forwardForce * Time.deltaTime);
+			recorrido++;
+		}
 		//Debug.Log (rigidbody.velocity.magnitude);
 
 		rigidbody.velocity = Vector3.ClampMagnitude (rigidbody.velocity, maxVelocity);

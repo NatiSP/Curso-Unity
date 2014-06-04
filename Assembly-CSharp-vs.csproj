@@ -46,17 +46,28 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GameBarCreationSystem\Scripts\ExampleGUIAspectsController.cs" />
+     <Compile Include="Assets\GameBarCreationSystem\Scripts\ExperienceSystem.cs" />
+     <Compile Include="Assets\GameBarCreationSystem\Scripts\GUIController.cs" />
+     <Compile Include="Assets\GameBarCreationSystem\Scripts\GlobeBarSystem.cs" />
+     <Compile Include="Assets\GameBarCreationSystem\Scripts\HealthSystem.cs" />
+     <Compile Include="Assets\GameBarCreationSystem\Scripts\ManaSystem.cs" />
+     <Compile Include="Assets\GameBarCreationSystem\Scripts\ScrollBarEssentials.cs" />
      <Compile Include="Assets\Scripts\Ammo.cs" />
      <Compile Include="Assets\Scripts\Coin.cs" />
      <Compile Include="Assets\Scripts\Corazon.cs" />
      <Compile Include="Assets\Scripts\CreatureSpawner.cs" />
      <Compile Include="Assets\Scripts\LanzaPiedras.cs" />
      <Compile Include="Assets\Scripts\Mine.cs" />
+     <Compile Include="Assets\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Scripts\MovementPlatform.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Puntuacion.cs" />
      <Compile Include="Assets\Scripts\Vida.cs" />
      <Compile Include="Assets\Scripts\Zombie.cs" />
+     <None Include="Assets\Monsterupdate\Materials\atsv2 vertexlit.shader" />
+     <None Include="Assets\GameBarCreationSystem\Shaders\UnlitAlphaWithFade.shader" />
+     <None Include="Assets\GameBarCreationSystem\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

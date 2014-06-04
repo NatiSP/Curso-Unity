@@ -3,20 +3,24 @@ using System.Collections;
 
 public class Vida : MonoBehaviour {
 
-	public float life = 3.0f;
+	public float life = 5.0f;
 
 	public void Hit(float receivedDamage){
 		life = life - receivedDamage;
-		transform.localScale = new Vector3(0.5f * life, transform.localScale.y, transform.localScale.z);
+		if(life >= 0.0f)
+			guiTexture.pixelInset = new Rect(guiTexture.pixelInset.x, guiTexture.pixelInset.y, 24 * life, guiTexture.pixelInset.height);
+		else
+			guiTexture.pixelInset = new Rect(guiTexture.pixelInset.x, guiTexture.pixelInset.y, 0, guiTexture.pixelInset.height);
 	}
 
 	public void Add(){
 		life++;
-		transform.localScale = new Vector3(0.5f * life, transform.localScale.y, transform.localScale.z);
+		guiTexture.pixelInset = new Rect(guiTexture.pixelInset.x, guiTexture.pixelInset.y, 24 * life, guiTexture.pixelInset.height);
 	}
 
 	public void Set(float num){
 		life = num;
-		transform.localScale = new Vector3(0.5f * life, transform.localScale.y, transform.localScale.z);
+		guiTexture.pixelInset = new Rect(guiTexture.pixelInset.x, guiTexture.pixelInset.y, 24 * life, guiTexture.pixelInset.height);
 	}
+	
 }
