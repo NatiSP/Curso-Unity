@@ -32,7 +32,7 @@ public class Zombie : MonoBehaviour {
 		if (towardsTarget.magnitude < sightRange)
 			rigidbody.AddForce (towardsTarget.normalized * forwardForce * Time.deltaTime);
 		else {
-			if(recorrido > 500){
+			if(recorrido > 100){
 				randX = (Random.value - 0.5f);
 				randZ = (Random.value - 0.5f);
 				recorrido = 0;

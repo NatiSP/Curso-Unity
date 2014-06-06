@@ -96,7 +96,7 @@ public class Player : MonoBehaviour {
 			//ncoins.SendMessage ("Death");
 		}
 
-		if (transform.position.y < -10) {
+		if (transform.position.y < -18) {
 			Death ();		
 		}
 	}

@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Coin.cs" />
      <Compile Include="Assets\Scripts\Corazon.cs" />
      <Compile Include="Assets\Scripts\CreatureSpawner.cs" />
+     <Compile Include="Assets\Scripts\GameFinished.cs" />
      <Compile Include="Assets\Scripts\LanzaPiedras.cs" />
      <Compile Include="Assets\Scripts\Mine.cs" />
      <Compile Include="Assets\Scripts\MouseLook.cs" />
